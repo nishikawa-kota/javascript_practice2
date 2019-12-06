@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+</body>
+<table>
+	<thead>
+		<tr>
+			<th><input type="radio" name="status" id="statusallbtn" value="すべて"><span>すべて</span>
+</th>
+			<th><input type="radio" name="status" id="statusfinishbtn"  value="完了"><span>完了</span>
+</th>
+			<th><input type="radio"  name="status" id="statusbtn" value="未完了"><span>未完了</span>
+</th>
+		</tr>
+	</thead>
+	<tbody  id="scdule">
+
+	</tbody>
+</table>
+
+<input type="text"  id="scduleText"><input type="submit" id="scduleadd">
+<script>
+	const allBtn = document.getElementById('statusallbtn');
+	const finishBtn = document.getElementById('statusfinishbtn');
+	const statusBtn = document.getElementById('statusbtn');
+	const scduleAddBtn = document.getElementById('scduleadd');
+	const workingBtn = document.getElementById('working');
+	const deleteBtn = document.getElementById('delete');
+
+	let scduledata = '';
+	let scdulenum = '';
+
+allBtn.addEventListener('click', event => {
+
+
+
+});
+finishBtn.addEventListener('click', event => {
+
+
+
+});
+statusBtn.addEventListener('click', event => {
+
+
+
+});
+scduleAddBtn.addEventListener('click', event => {
+	let scduleText = document.getElementById('scduleText');
+	var node = document.createElement("tr");
+	node.innerHTML = '<td>'+ scduleText.value + '<input type="button"  id="working" value="作業中">'　+ '<input type="button" id="delete" value="削除"><span>削除</span>' + '</td>';
+	document.getElementById("scdule").appendChild(node);
+	scdulenum = scdulenum + 1;
+
+});
+workingBtn.addEventListener('click', event => {
+	console.log(e.target.value);
+
+
+
+});
+
+</script>
+</html>
