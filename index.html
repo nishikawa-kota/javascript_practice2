@@ -7,15 +7,22 @@
 <body>
 
 </body>
+<input type="radio" name="status" id="statusallbtn" value="すべて"><span>すべて</span>
+<input type="radio" name="status" id="statusfinishbtn"  value="完了"><span>完了</span>
+<input type="radio"  name="status" id="statusbtn" value="未完了"><span>未完了</span>
 <table>
 	<thead>
 		<tr>
-			<th><input type="radio" name="status" id="statusallbtn" value="すべて"><span>すべて</span>
+			<th>
+				ID
 </th>
-			<th><input type="radio" name="status" id="statusfinishbtn"  value="完了"><span>完了</span>
+			<th>
+				コメント
 </th>
-			<th><input type="radio"  name="status" id="statusbtn" value="未完了"><span>未完了</span>
+			<th>
+				状態
 </th>
+
 		</tr>
 	</thead>
 	<tbody  id="scdule">
@@ -33,37 +40,39 @@
 	const deleteBtn = document.getElementById('delete');
 
 	let scduledata = '';
-	let scdulenum = '';
-
-allBtn.addEventListener('click', event => {
-
-
-
-});
-finishBtn.addEventListener('click', event => {
-
-
-
-});
-statusBtn.addEventListener('click', event => {
-
-
-
-});
+	let scdulenum = 0;
+	let todos = new Array();
+	let scdule = {};
 scduleAddBtn.addEventListener('click', event => {
+
 	let scduleText = document.getElementById('scduleText');
-	var node = document.createElement("tr");
-	node.innerHTML = '<td>'+ scduleText.value + '<input type="button"  id="working" value="作業中">'　+ '<input type="button" id="delete" value="削除"><span>削除</span>' + '</td>';
-	document.getElementById("scdule").appendChild(node);
+
+	scdule ={
+		"id": scdulenum,
+		"status" : "作業中",
+		"scduleText" : scduleText.value
+
+	}
+	todos.push(scdule);
+	arraypush(todos);
+});
+function arraypush(todos) {
+
+	let node = document.createElement("tr");
+
+	for (let i = todos.length - 1; i >= 0; i++) {
+		node.innerHTML = i + '<td><span id="text">'+ todos[i].scduleText + "</span></td>" + `<input type="button"  id=${i} value="作業中">`　+ '<input type="button" id="delete" value="削除">' + '</td>';
+		document.getElementById("scdule").appendChild(node);
+	};
+
+
+
 	scdulenum = scdulenum + 1;
 
-});
-workingBtn.addEventListener('click', event => {
-	console.log(e.target.value);
+
+}
 
 
-
-});
 
 </script>
 </html>
