@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
 <head>
-	<meta charset="UTF-8">
 	<title>Document</title>
 </head>
 <body>
 
 </body>
 <input type="radio" name="status" id="statusallbtn" value="すべて"><span>すべて</span>
-<input type="radio" name="status" id="statusfinishbtn"  value="完了"><span>完了</span>
-<input type="radio"  name="status" id="statusbtn" value="未完了"><span>未完了</span>
+<input type="radio" name="status" id="statusfinishbtn"  value="終了"><span>終了</span>
+<input type="radio"  name="status" id="statusbtn" value="作業中"><span>作業中</span>
 <table>
 	<thead>
 		<tr>
@@ -17,7 +19,7 @@
 				ID
 </th>
 			<th>
-				コメント
+				作業内容
 </th>
 			<th>
 				状態
@@ -41,16 +43,16 @@
 
 	let scduledata = '';
 	let scdulenum = 0;
-	let todos = new Array();
-	let scdule = {};
+	const todos = [];
+	let scdule =  [];
 scduleAddBtn.addEventListener('click', event => {
 
-	let scduleText = document.getElementById('scduleText');
+	const scduleText = document.getElementById('scduleText');
 
-	scdule ={
+	scdule = {
 		"id": scdulenum,
 		"status" : "作業中",
-		"scduleText" : scduleText.value
+		"scduletext" : scduleText.value
 
 	}
 	todos.push(scdule);
@@ -58,11 +60,35 @@ scduleAddBtn.addEventListener('click', event => {
 });
 function arraypush(todos) {
 
-	let node = document.createElement("tr");
+	let trnode = document.createElement("tr");
+	let tdnode = document.createElement("td");
 
 	for (let i = todos.length - 1; i >= 0; i++) {
-		node.innerHTML = i + '<td><span id="text">'+ todos[i].scduleText + "</span></td>" + `<input type="button"  id=${i} value="作業中">`　+ '<input type="button" id="delete" value="削除">' + '</td>';
-		document.getElementById("scdule").appendChild(node);
+		const tdnode = document.createElement("td");
+		const tdnodenum = document.createElement("td");
+		const tdnodeinput = document.createElement("td");
+		const spannode = document.createElement("span");
+		const inputtodonode = document.createElement("input");
+		const inputdeletenode = document.createElement("input");
+		inputtodonode.id = i;
+		inputtodonode.value = '作業中';
+		inputtodonode.type = 'button';
+		inputdeletenode.id = 'delte';
+		inputdeletenode.value = '削除';
+		inputdeletenode.type = 'button';
+		console.log(todos[i]['scduletext']);
+		spannode.innerHTML = todos[i]['scduletext'];
+		tdnodenum.innerHTML = i;
+		trnode.innerHTML = i;
+		trnode.appendChild(inputtodonode);
+		trnode.appendChild(inputdeletenode);
+		// tdnodeinput.innerHTML = inputtodonode + inputdeletenode;
+		trnode.appendChild(tdnode);
+		trnode.appendChild(tdnodenum);
+		trnode.appendChild(tdnodeinput);
+
+		// trnode.innerHTML = i + '<td><span id="text">'+ todos[i].scduleText + "</span></td>" + `<input type="button"  id=${i} value="作業中">`　+ '<input type="button" id="delete" value="削除">' + '</td>';
+		document.getElementById("scdule").appendChild(trnode);
 	};
 
 
