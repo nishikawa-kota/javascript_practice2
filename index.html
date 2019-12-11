@@ -19,7 +19,7 @@
 				ID
 </th>
 			<th>
-				作業内容
+				コメント
 </th>
 			<th>
 				状態
@@ -63,7 +63,7 @@ function arraypush(todos) {
 	let trnode = document.createElement("tr");
 	let tdnode = document.createElement("td");
 
-	for (let i = todos.length - 1; i >= 0; i++) {
+	for (let i = todos.length - 1; i <= todos.length; i++) {
 		const tdnode = document.createElement("td");
 		const tdnodenum = document.createElement("td");
 		const tdnodeinput = document.createElement("td");
@@ -78,11 +78,10 @@ function arraypush(todos) {
 		inputdeletenode.type = 'button';
 		console.log(todos[i]['scduletext']);
 		spannode.innerHTML = todos[i]['scduletext'];
-		tdnodenum.innerHTML = i;
 		trnode.innerHTML = i;
-		trnode.appendChild(inputtodonode);
-		trnode.appendChild(inputdeletenode);
-		// tdnodeinput.innerHTML = inputtodonode + inputdeletenode;
+		tdnodenum.appendChild(spannode);
+		tdnodeinput.appendChild(inputtodonode);
+		tdnodeinput.appendChild(inputdeletenode);
 		trnode.appendChild(tdnode);
 		trnode.appendChild(tdnodenum);
 		trnode.appendChild(tdnodeinput);
