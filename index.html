@@ -63,7 +63,7 @@ function arraypush(todos) {
 	let trnode = document.createElement("tr");
 	let tdnode = document.createElement("td");
 
-	for (let i = todos.length - 1; i <= todos.length; i++) {
+	for (let i = todos.length - 1; i < todos.length; i++) {
 		const tdnode = document.createElement("td");
 		const tdnodenum = document.createElement("td");
 		const tdnodeinput = document.createElement("td");
@@ -76,7 +76,6 @@ function arraypush(todos) {
 		inputdeletenode.id = 'delte';
 		inputdeletenode.value = '削除';
 		inputdeletenode.type = 'button';
-		console.log(todos[i]['scduletext']);
 		spannode.innerHTML = todos[i]['scduletext'];
 		trnode.innerHTML = i;
 		tdnodenum.appendChild(spannode);
@@ -88,12 +87,19 @@ function arraypush(todos) {
 
 		// trnode.innerHTML = i + '<td><span id="text">'+ todos[i].scduleText + "</span></td>" + `<input type="button"  id=${i} value="作業中">`　+ '<input type="button" id="delete" value="削除">' + '</td>';
 		document.getElementById("scdule").appendChild(trnode);
+		inputdeletenode.addEventListener('click',deleteSchedule, true);
 	};
 
 
 
 	scdulenum = scdulenum + 1;
 
+
+}
+
+function deleteSchedule (event) {
+	tr = event.target.parentNode.parentNode;
+	tr.parentNode.deleteRow(tr.sectionRowIndex);
 
 }
 
