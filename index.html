@@ -68,14 +68,10 @@ function arraypush(todos) {
 		const tdnodenum = document.createElement("td");
 		const tdnodeinput = document.createElement("td");
 		const spannode = document.createElement("span");
-		const inputtodonode = document.createElement("input");
-		const inputdeletenode = document.createElement("input");
-		inputtodonode.id = i;
-		inputtodonode.value = '作業中';
-		inputtodonode.type = 'button';
-		inputdeletenode.id = 'delte';
-		inputdeletenode.value = '削除';
-		inputdeletenode.type = 'button';
+
+		inputtodonode =createStatusBtn(i);
+		inputdeletenode =createDeleteBtn(i);
+
 		spannode.innerHTML = todos[i]['scduletext'];
 		trnode.innerHTML = i;
 		tdnodenum.appendChild(spannode);
@@ -85,7 +81,6 @@ function arraypush(todos) {
 		trnode.appendChild(tdnodenum);
 		trnode.appendChild(tdnodeinput);
 
-		// trnode.innerHTML = i + '<td><span id="text">'+ todos[i].scduleText + "</span></td>" + `<input type="button"  id=${i} value="作業中">`　+ '<input type="button" id="delete" value="削除">' + '</td>';
 		document.getElementById("scdule").appendChild(trnode);
 		inputdeletenode.addEventListener('click',deleteSchedule, true);
 	};
@@ -103,7 +98,28 @@ function deleteSchedule (event) {
 
 }
 
+function createStatusBtn (i) {
+		const inputtodonode = document.createElement("input");
+		inputtodonode.id = i;
+		inputtodonode.value = '作業中';
+		inputtodonode.type = 'button';
 
+		return inputtodonode
+}
+function createDeleteBtn (i) {
+		const inputdeletenode = document.createElement("input");
+		inputdeletenode.id = 'delte';
+		inputdeletenode.value = '削除';
+		inputdeletenode.type = 'button';
+		return inputdeletenode
+}
+function createFinishBtn () {
+		inputtodonode.id = i;
+		inputtodonode.value = '完了';
+		inputtodonode.type = 'button';
+		inputdeletenode.id = 'finish';
 
+		return inputfinish
+}
 </script>
 </html>
