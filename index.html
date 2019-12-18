@@ -97,6 +97,13 @@ function deleteSchedule (event) {
 	tr.parentNode.deleteRow(tr.sectionRowIndex);
 
 }
+function finishSchedule (event) {
+	console.log(event.target.value)
+	if (event.target.value === '作業中'){;
+		event.target.value = '終了';
+	}else {
+		event.target.value = '作業中';
+	}
 
 function createStatusBtn (i) {
 		const inputtodonode = document.createElement("input");
