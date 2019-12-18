@@ -45,6 +45,12 @@
 	let scdulenum = 0;
 	const todos = [];
 	let scdule =  [];
+	allBtn.addEventListener('click',statusallbtn, true);
+
+	finishBtn.addEventListener('click',statusfinishbtn, true);
+	statusBtn.addEventListener('click',statusworkingbtn, true);
+
+
 scduleAddBtn.addEventListener('click', event => {
 
 	const scduleText = document.getElementById('scduleText');
@@ -82,7 +88,6 @@ function arraypush(todos) {
 		trnode.appendChild(tdnodeinput);
 
 		document.getElementById("scdule").appendChild(trnode);
-		inputdeletenode.addEventListener('click',deleteSchedule, true);
 	};
 
 
@@ -105,28 +110,67 @@ function finishSchedule (event) {
 		event.target.value = '作業中';
 	}
 
-function createStatusBtn (i) {
+
+}
+function createStatusBtn (index) {
 		const inputtodonode = document.createElement("input");
-		inputtodonode.id = i;
+		inputtodonode.id = index;
 		inputtodonode.value = '作業中';
 		inputtodonode.type = 'button';
+		inputtodonode.name = 'action';
+
+		inputtodonode.addEventListener('click',finishSchedule, true);
 
 		return inputtodonode
 }
-function createDeleteBtn (i) {
+function createDeleteBtn (index) {
 		const inputdeletenode = document.createElement("input");
 		inputdeletenode.id = 'delte';
 		inputdeletenode.value = '削除';
 		inputdeletenode.type = 'button';
+		inputdeletenode.addEventListener('click',deleteSchedule, true);
+
 		return inputdeletenode
 }
-function createFinishBtn () {
-		inputtodonode.id = i;
+function createFinishBtn (index) {
+		inputtodonode.id = index;
 		inputtodonode.value = '完了';
 		inputtodonode.type = 'button';
 		inputdeletenode.id = 'finish';
 
 		return inputfinish
+}
+
+function statusallbtn (event){
+	actionelement = document.getElementsByName('action');
+	for (let j = 0; j < actionelement.length; j++) {
+		tr = actionelement[j].parentNode.parentNode;
+		tr.setAttribute("style", "display:'';");
+	};
+}
+function statusfinishbtn (event){
+	actionelement = document.getElementsByName('action');
+	for (let k = 0; k < actionelement.length; k++) {
+		if (actionelement[k].value == '終了'){
+			tr = actionelement[k].parentNode.parentNode;
+			tr.setAttribute("style", "display:'';");
+		} else {
+			tr = actionelement[k].parentNode.parentNode;
+			tr.setAttribute("style", "display:none;");
+		}
+	};
+}
+function statusworkingbtn (event){
+	actionelement = document.getElementsByName('action');
+	for (let k = 0; k < actionelement.length; k++) {
+		if (actionelement[k].value == '作業中'){
+			tr = actionelement[k].parentNode.parentNode;
+			tr.setAttribute("style", "display:'';");
+		} else {
+			tr = actionelement[k].parentNode.parentNode;
+			tr.setAttribute("style", "display:none;");
+		}
+	};
 }
 </script>
 </html>
