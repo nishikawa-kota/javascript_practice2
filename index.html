@@ -11,7 +11,7 @@
 </body>
 <input type="radio" name="status" id="statusallbtn" value="すべて"><span>すべて</span>
 <input type="radio" name="status" id="statusfinishbtn"  value="終了"><span>終了</span>
-<input type="radio"  name="status" id="statusbtn" value="作業中"><span>作業中</span>
+<input type="radio"  name="status" id="statusworkbtn" value="作業中"><span>作業中</span>
 <table>
 	<thead>
 		<tr>
@@ -36,7 +36,7 @@
 <script>
 	const allBtn = document.getElementById('statusallbtn');
 	const finishBtn = document.getElementById('statusfinishbtn');
-	const statusBtn = document.getElementById('statusbtn');
+	const statusBtn = document.getElementById('statusworkbtn');
 	const scduleAddBtn = document.getElementById('scduleadd');
 	const workingBtn = document.getElementById('working');
 	const deleteBtn = document.getElementById('delete');
@@ -45,10 +45,10 @@
 	let scdulenum = 0;
 	const todos = [];
 	let scdule =  [];
-	allBtn.addEventListener('click',statusallbtn, true);
+	allBtn.addEventListener('click',statusbtn, true);
 
-	finishBtn.addEventListener('click',statusfinishbtn, true);
-	statusBtn.addEventListener('click',statusworkingbtn, true);
+	finishBtn.addEventListener('click',statusbtn, true);
+	statusBtn.addEventListener('click',statusbtn, true);
 
 
 scduleAddBtn.addEventListener('click', event => {
@@ -141,36 +141,26 @@ function createFinishBtn (index) {
 		return inputfinish
 }
 
-function statusallbtn (event){
+function statusbtn (event){
+	targeValue = event.target.value;
 	actionelement = document.getElementsByName('action');
-	for (let j = 0; j < actionelement.length; j++) {
-		tr = actionelement[j].parentNode.parentNode;
-		tr.setAttribute("style", "display:'';");
-	};
-}
-function statusfinishbtn (event){
-	actionelement = document.getElementsByName('action');
-	for (let k = 0; k < actionelement.length; k++) {
-		if (actionelement[k].value == '終了'){
-			tr = actionelement[k].parentNode.parentNode;
+	actionelement.forEach(function(element){
+
+		if (element.value === targeValue) {
+			tr = element.parentNode.parentNode;
+			tr.setAttribute("style", "display:'';");
+		} else if (targeValue === 'すべて'){
+			tr = element.parentNode.parentNode;
 			tr.setAttribute("style", "display:'';");
 		} else {
-			tr = actionelement[k].parentNode.parentNode;
+			tr = element.parentNode.parentNode;
 			tr.setAttribute("style", "display:none;");
-		}
-	};
+		};
+
+
+	});
 }
-function statusworkingbtn (event){
-	actionelement = document.getElementsByName('action');
-	for (let k = 0; k < actionelement.length; k++) {
-		if (actionelement[k].value == '作業中'){
-			tr = actionelement[k].parentNode.parentNode;
-			tr.setAttribute("style", "display:'';");
-		} else {
-			tr = actionelement[k].parentNode.parentNode;
-			tr.setAttribute("style", "display:none;");
-		}
-	};
-}
+
+
 </script>
 </html>
