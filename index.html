@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<head>
+	<title>Document</title>
+</head>
+<body>
+
+</body>
+<input type="radio" name="status" id="statusallbtn" value="すべて"><span>すべて</span>
+<input type="radio" name="status" id="statusfinishbtn"  value="終了"><span>終了</span>
+<input type="radio"  name="status" id="statusworkbtn" value="作業中"><span>作業中</span>
+<table>
+	<thead>
+		<tr>
+			<th>
+				ID
+</th>
+			<th>
+				コメント
+</th>
+			<th>
+				状態
+</th>
+
+		</tr>
+	</thead>
+	<tbody  id="scdule">
+
+	</tbody>
+</table>
+
+<input type="text"  id="scduleText"><input type="submit" id="scduleadd">
+<script>
+	const allBtn = document.getElementById('statusallbtn');
+	const finishBtn = document.getElementById('statusfinishbtn');
+	const statusBtn = document.getElementById('statusworkbtn');
+	const scduleAddBtn = document.getElementById('scduleadd');
+	const workingBtn = document.getElementById('working');
+	const deleteBtn = document.getElementById('delete');
+
+	let scduledata = '';
+	let scdulenum = 0;
+	const todos = [];
+	let scdule =  [];
+	allBtn.addEventListener('click',statusbtn, true);
+
+	finishBtn.addEventListener('click',statusbtn, true);
+	statusBtn.addEventListener('click',statusbtn, true);
+
+
+scduleAddBtn.addEventListener('click', event => {
+
+	const scduleText = document.getElementById('scduleText');
+
+	scdule = {
+		"id": scdulenum,
+		"status" : "作業中",
+		"scduletext" : scduleText.value
+
+	}
+	todos.push(scdule);
+	arraypush(todos);
+});
+function arraypush(todos) {
+
+	let trnode = document.createElement("tr");
+	let tdnode = document.createElement("td");
+
+	for (let i = todos.length - 1; i < todos.length; i++) {
+		const tdnode = document.createElement("td");
+		const tdnodenum = document.createElement("td");
+		const tdnodeinput = document.createElement("td");
+		const spannode = document.createElement("span");
+
+		inputtodonode =createStatusBtn(i);
+		inputdeletenode =createDeleteBtn(i);
+
+		spannode.innerHTML = todos[i]['scduletext'];
+		trnode.innerHTML = i;
+		tdnodenum.appendChild(spannode);
+		tdnodeinput.appendChild(inputtodonode);
+		tdnodeinput.appendChild(inputdeletenode);
+		trnode.appendChild(tdnode);
+		trnode.appendChild(tdnodenum);
+		trnode.appendChild(tdnodeinput);
+
+		document.getElementById("scdule").appendChild(trnode);
+	};
+
+
+
+	scdulenum = scdulenum + 1;
+
+
+}
+
+function deleteSchedule (event) {
+	tr = event.target.parentNode.parentNode;
+	tr.parentNode.deleteRow(tr.sectionRowIndex);
+
+}
+function finishSchedule (event) {
+	console.log(event.target.value)
+	if (event.target.value === '作業中'){;
+		event.target.value = '終了';
+	}else {
+		event.target.value = '作業中';
+	}
+
+
+}
+function createStatusBtn (index) {
+		const inputtodonode = document.createElement("input");
+		inputtodonode.id = index;
+		inputtodonode.value = '作業中';
+		inputtodonode.type = 'button';
+		inputtodonode.name = 'action';
+
+		inputtodonode.addEventListener('click',finishSchedule, true);
+
+		return inputtodonode
+}
+function createDeleteBtn (index) {
+		const inputdeletenode = document.createElement("input");
+		inputdeletenode.id = 'delte';
+		inputdeletenode.value = '削除';
+		inputdeletenode.type = 'button';
+		inputdeletenode.addEventListener('click',deleteSchedule, true);
+
+		return inputdeletenode
+}
+function createFinishBtn (index) {
+		inputtodonode.id = index;
+		inputtodonode.value = '完了';
+		inputtodonode.type = 'button';
+		inputdeletenode.id = 'finish';
+
+		return inputfinish
+}
+
+function statusbtn (event){
+	targeValue = event.target.value;
+	actionelement = document.getElementsByName('action');
+	actionelement.forEach(function(element){
+
+		if (element.value === targeValue) {
+			tr = element.parentNode.parentNode;
+			tr.setAttribute("style", "display:'';");
+		} else if (targeValue === 'すべて'){
+			tr = element.parentNode.parentNode;
+			tr.setAttribute("style", "display:'';");
+		} else {
+			tr = element.parentNode.parentNode;
+			tr.setAttribute("style", "display:none;");
+		};
+
+
+	});
+}
+
+
+</script>
+</html>
